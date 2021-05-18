@@ -7,10 +7,16 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "concurrently": "^6.1.0",
+    "json-server": "^0.16.3",
     "vite-plugin-vue2": "^1.4.0",
-    "vue": "^2.6.12"
+    "vue": "^2.6.12",
+    "vue-router": "^3.5.1"
   },
   "devDependencies": {
+    "node-sass": "^6.0.0",
+    "sass": "^1.32.13",
+    "sass-loader": "^11.1.1",
     "vite": "^2.0.5"
   }
 }
