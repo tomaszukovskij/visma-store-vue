@@ -12,9 +12,5 @@
   background: $green;
   @include flex(row, center, center, warap);
   cursor: pointer;
-
-  &:before {
-    content: "+";
-    color: $white;
-  }
+  color: $white;
 }

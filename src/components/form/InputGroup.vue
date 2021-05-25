@@ -8,7 +8,7 @@
 import t from "vue-types";
 export default {
   props: {
-    title: t.String,
+    title: t.string,
   },
 };
 </script>

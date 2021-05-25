@@ -6,8 +6,8 @@
           <a href="/">Logo</a>
         </div>
         <div class="header__controls">
-          <button type="button" id="search" class="btn">Search</button>
-          <button type="button" class="btn btn--primary">Login</button>
+          <base-button id="search">Search</base-button>
+          <base-button class="btn--primary">Login</base-button>
         </div>
       </div>
       <nav>
@@ -22,3 +22,11 @@
     </div>
   </header>
 </template>
+<script>
+import BaseButton from "../base/BaseButton.vue";
+export default {
+  components: {
+    BaseButton,
+  },
+};
+</script>

@@ -9,7 +9,7 @@
       <span class="products-list__price">{{ item.price }} USD</span>
       <div>
         <base-button
-          class="btn--primary btn--xs-full js-edit-product"
+          class="btn--primary btn--xs-full"
           :value="item.id"
           @click.prevent.native="sendEditDataToModal"
         >
@@ -30,7 +30,7 @@ import BaseButton from "../base/BaseButton.vue";
 import t from "vue-types";
 export default {
   props: {
-    item: t.Object,
+    item: t.object,
   },
   components: {
     BaseButton,

@@ -13,8 +13,8 @@
       "price": "36.99",
       "imageUrl": "https://placeimg.com/500/360/tech?v4",
       "text": "Space for a small product description",
-      "isHighlighted": false,
-      "id": 4
+      "isHighlighted": true,
+      "id": 1
     },
     {
       "title": "Naujas",

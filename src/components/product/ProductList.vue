@@ -12,16 +12,20 @@
       </div>
     </div>
     <modal-add-edit
-      v-if="toggleEditModal"
+      v-if="isEditModalVisible"
       :productData="productToEdit"
-      @toggleModal="toggleEditModalFn"
+      @toggle-modal="toggleEditModalFn"
     ></modal-add-edit>
     <modal-delete
-      v-if="toggleDeleteModal"
+      v-if="isDeleteModalVisible"
       :productData="productToEdit"
-      @toggleModal="toggleDeleteModalFn"
+      @toggle-modal="toggleDeleteModalFn"
     ></modal-delete>
-    <add-new-product-btn @data="openAddProductModal"></add-new-product-btn>
+    <div id="product-control">
+      <div class="product-control__icon" @click="createNewProductHandler">
+        +
+      </div>
+    </div>
   </section>
 </template>
 
@@ -29,46 +33,52 @@
 import ProductItem from "./ProductListItem.vue";
 import ModalAddEdit from "../modal/ModalAddEdit.vue";
 import ModalDelete from "../modal/ModalDelete.vue";
-import AddNewProductBtn from "../actions/AddNewProductBtn.vue";
 import t from "vue-types";
 
 export default {
   props: {
-    productList: t.Array,
+    productList: t.array,
   },
   components: {
     ProductItem,
     ModalAddEdit,
     ModalDelete,
-    AddNewProductBtn,
   },
   data() {
     return {
-      productToEdit: "",
-      toggleEditModal: false,
-      toggleDeleteModal: false,
+      productToEdit: null,
+      isEditModalVisible: false,
+      isDeleteModalVisible: false,
     };
   },
   methods: {
     sendProductDataEditToModal(value) {
       this.productToEdit = value;
       if (value.modalType === "form") {
-        this.toggleEditModal = !this.toggleEditModal;
+        this.isEditModalVisible = !this.isEditModalVisible;
       } else if (value.modalType === "delete") {
-        this.toggleDeleteModal = !this.toggleDeleteModal;
+        this.isDeleteModalVisible = !this.isDeleteModalVisible;
       }
+    },
+
+    createNewProductHandler() {
+      const data = {
+        modalType: "form",
+      };
+      this.productToEdit = data;
+      this.isEditModalVisible = !this.isEditModalVisible;
     },
 
     openAddProductModal(value) {
       this.productToEdit = value;
-      this.toggleEditModal = !this.toggleEditModal;
+      this.isEditModalVisible = !this.isEditModalVisible;
     },
 
     toggleEditModalFn(val) {
-      this.toggleEditModal = val;
+      this.isEditModalVisible = val;
     },
     toggleDeleteModalFn(val) {
-      this.toggleDeleteModal = val;
+      this.isDeleteModalVisible = val;
     },
   },
 };
