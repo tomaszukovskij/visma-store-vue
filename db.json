@@ -37,7 +37,7 @@
       "price": 111111,
       "imageUrl": "https://placeimg.com/500/360/tech?v6",
       "text": "1223",
-      "isHighlighted": true,
+      "isHighlighted": false,
       "id": 8
     }
   ]

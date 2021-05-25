@@ -4,7 +4,7 @@
     <main>
       <carousel-list
         v-if="productList.length"
-        :carousel-list="carouselList"
+        :carousel-list="carouselListData"
       ></carousel-list>
       <product-list :product-list="productList"></product-list>
     </main>
@@ -29,7 +29,6 @@ export default {
   data() {
     return {
       productList: [],
-      carouselList: [],
     };
   },
   provide() {
@@ -37,24 +36,13 @@ export default {
       fetchProductData: this.fetchProductData,
     };
   },
+  computed: {
+    carouselListData() {
+      return this.productList.filter((d) => d.isHighlighted);
+    },
+  },
   methods: {
     async fetchProductData() {
-      this.carouselList = [];
-      const response = await fetch("api/products");
-
-      if (!response.ok) {
-        throw response;
-      }
-
-      const data = await response.json();
-      this.productList = data;
-
-      // Filter data what is highlighted and push to data, to show it on carousel
-      data
-        .filter((d) => d.isHighlighted)
-        .forEach((item) => {
-          this.carouselList.push(item);
-        });
       this.productList = await Http.get("/api/products");
     },
   },
