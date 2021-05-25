@@ -12,6 +12,7 @@
 import TheHeader from "./components/layout/TheHeader.vue";
 import TheFooter from "./components/layout/TheFooter.vue";
 import ProductList from "./components/product/ProductList.vue";
+import Http from "./api/apiInterface.js";
 
 export default {
   components: {
@@ -22,7 +23,6 @@ export default {
   data() {
     return {
       productList: [],
-      justText: "Text here",
     };
   },
   provide() {
@@ -32,14 +32,7 @@ export default {
   },
   methods: {
     async fetchProductData() {
-      const response = await fetch("api/products");
-
-      if (!response.ok) {
-        throw response;
-      }
-
-      const data = await response.json();
-      this.productList = data;
+      this.productList = await Http.get("/api/products");
     },
   },
 

@@ -1,28 +1,19 @@
 {
   "products": [
     {
-      "id": 1,
-      "title": "Product title",
-      "text": "Space for a small product description",
+      "title": "Product titleee",
       "price": "36.99",
       "imageUrl": "https://placeimg.com/500/360/tech",
-      "isHighlighted": true
-    },
-    {
-      "title": "Titleee",
-      "price": "36.99",
-      "imageUrl": "https://placeimg.com/500/360/tech?v4",
       "text": "Space for a small product description",
-      "isHighlighted": false,
-      "id": 4
+      "isHighlighted": true,
+      "id": 1
     },
     {
-      "id": 5,
-      "title": "Naujas",
-      "price": "20",
-      "imageUrl": "https://placeimg.com/500/360/tech?v9",
-      "text": "Sveiki",
-      "isHighlighted": true
+      "title": "Product titleee",
+      "price": 222,
+      "imageUrl": "https://placeimg.com/500/360/tech?v20",
+      "text": "asdasd asd ad ",
+      "id": 5
     },
     {
       "title": "Papildyta",
@@ -31,14 +22,6 @@
       "text": "Sveiki",
       "isHighlighted": true,
       "id": 6
-    },
-    {
-      "title": "Six titleeeeee",
-      "price": 111111,
-      "imageUrl": "https://placeimg.com/500/360/tech?v6",
-      "text": "1223",
-      "isHighlighted": "",
-      "id": 8
     }
   ]
 }

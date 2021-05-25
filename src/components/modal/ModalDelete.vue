@@ -5,18 +5,12 @@
       <div>
         <base-button
           type="submit"
-          id="delete-product"
           class="btn btn--secondary"
           @click.prevent.native="deleteProductHandler"
         >
           Delete
         </base-button>
-
-        <base-button
-          type="button"
-          class="btn js-cancel"
-          @click.prevent.native="hideModalHandler"
-        >
+        <base-button class="btn" @click.prevent.native="hideModalHandler">
           Cancel
         </base-button>
       </div>
@@ -27,10 +21,11 @@
 import t from "vue-types";
 import TheModal from "../modal/TheModal.vue";
 import BaseButton from "../base/BaseButton.vue";
+import Http from "../../api/apiInterface.js";
 export default {
   inject: ["fetchProductData"],
   props: {
-    productData: t.Object,
+    productData: t.object,
   },
   components: {
     TheModal,
@@ -38,16 +33,10 @@ export default {
   },
   methods: {
     hideModalHandler() {
-      this.$emit("toggleModal", false);
+      this.$emit("toggle-modal", false);
     },
-    async deleteProductHandler() {
-      const response = await fetch("api/products/" + this.productData.data, {
-        method: "DELETE",
-      });
-
-      if (!response.ok) {
-        throw response;
-      }
+    deleteProductHandler() {
+      Http.delete("api/products/" + this.productData.data);
 
       this.hideModalHandler();
       this.fetchProductData();

@@ -1,10 +1,10 @@
 <template>
   <the-modal>
     <form class="modal__form">
-      <input-group :title="'Title'">
+      <input-group title="Title">
         <input type="text" name="title" id="title" v-model="title" />
       </input-group>
-      <input-group :title="'Price'">
+      <input-group title="Price">
         <input
           type="number"
           name="price"
@@ -13,13 +13,13 @@
           v-model.number="price"
         />
       </input-group>
-      <input-group :title="'Image url'">
+      <input-group title="Image url">
         <input type="text" name="image-url" id="image-url" v-model="imageUrl" />
       </input-group>
-      <input-group :title="'Text'">
+      <input-group title="Text">
         <textarea name="text" id="text" v-model="text"></textarea>
       </input-group>
-      <input-group :title="'Is highlighted?'">
+      <input-group title="Is highlighted?">
         <input type="checkbox" id="isHighlighted" v-model="isHighlighted" />
       </input-group>
       <div class="form-group">
@@ -30,14 +30,10 @@
           @click.prevent.native="editProductHandler"
           >{{ submitButtonText }}
         </base-button>
-        <base-button
-          type="button"
-          class="btn js-cancel"
-          @click.prevent.native="hideModalHandler"
+        <base-button class="btn" @click.prevent.native="hideModalHandler"
           >Cancel
         </base-button>
       </div>
-      <input type="hidden" name="hidden-id" id="hidden-id" />
     </form>
   </the-modal>
 </template>
@@ -46,10 +42,11 @@ import t from "vue-types";
 import InputGroup from "../form/InputGroup.vue";
 import TheModal from "../modal/TheModal.vue";
 import BaseButton from "../base/BaseButton.vue";
+import Http from "../../api/apiInterface.js";
 export default {
   inject: ["fetchProductData"],
   props: {
-    productData: t.Object,
+    productData: t.object,
   },
   components: {
     InputGroup,
@@ -59,7 +56,7 @@ export default {
   watch: {
     productData: {
       immediate: true,
-      handler(value) {
+      handler() {
         if (this.productData.data !== undefined) {
           this.title = this.productData.data.title;
           this.price = this.productData.data.price;
@@ -89,9 +86,9 @@ export default {
   },
   methods: {
     hideModalHandler() {
-      this.$emit("toggleModal", false);
+      this.$emit("toggle-modal", false);
     },
-    async editProductHandler() {
+    editProductHandler() {
       // let isValid;
 
       // for (const property in this.$refs) {
@@ -109,40 +106,14 @@ export default {
         isHighlighted: this.isHighlighted,
       };
 
-      let resData;
-
-      if (this.productData.data.id !== undefined) {
-        const response = await fetch(
-          "api/products/" + this.productData.data.id,
-          {
-            method: "PUT",
-            headers: {
-              "Content-type": "application/json",
-            },
-            body: JSON.stringify(data),
-          }
-        );
-        if (!response.ok) {
-          throw response;
-        }
-        resData = await response.json();
+      if (this.productData.data !== undefined) {
+        Http.put("/api/products/" + this.productData.data.id, data);
       } else {
-        const response = await fetch("api/products/", {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
-        if (!response.ok) {
-          throw response;
-        }
-        resData = await response.json();
+        Http.post("/api/products/", data);
       }
 
       this.hideModalHandler();
       this.fetchProductData();
-      return resData;
     },
   },
 };
