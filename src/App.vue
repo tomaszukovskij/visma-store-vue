@@ -1,29 +1,47 @@
 <template>
-  <div id="app">
-    <img
-      alt="Vue logo"
-      src="./assets/logo.png"
-    />
-    <HelloWorld msg="Hello Vue 2 + Vite" />
+  <div>
+    <the-header></the-header>
+    <main>
+      <product-list :product-list="productList"></product-list>
+    </main>
+    <the-footer></the-footer>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import TheHeader from "./components/layout/TheHeader.vue";
+import TheFooter from "./components/layout/TheFooter.vue";
+import ProductList from "./components/product/ProductList.vue";
+import Http from "./api/apiInterface.js";
+
 export default {
   components: {
-    HelloWorld,
+    TheHeader,
+    TheFooter,
+    ProductList,
+  },
+  data() {
+    return {
+      productList: [],
+    };
+  },
+  provide() {
+    return {
+      fetchProductData: this.fetchProductData,
+    };
+  },
+  methods: {
+    async fetchProductData() {
+      this.productList = await Http.get("/api/products");
+    },
+  },
+
+  created() {
+    this.fetchProductData();
   },
 };
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+@import "./assets/scss/style.scss";
 </style>

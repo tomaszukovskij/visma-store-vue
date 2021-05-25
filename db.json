@@ -1,0 +1,27 @@
+{
+  "products": [
+    {
+      "title": "Product titleee",
+      "price": "36.99",
+      "imageUrl": "https://placeimg.com/500/360/tech",
+      "text": "Space for a small product description",
+      "isHighlighted": true,
+      "id": 1
+    },
+    {
+      "title": "Product titleee",
+      "price": 222,
+      "imageUrl": "https://placeimg.com/500/360/tech?v20",
+      "text": "asdasd asd ad ",
+      "id": 5
+    },
+    {
+      "title": "Papildyta",
+      "price": "20",
+      "imageUrl": "https://placeimg.com/500/360/tech?v9",
+      "text": "Sveiki",
+      "isHighlighted": true,
+      "id": 6
+    }
+  ]
+}
