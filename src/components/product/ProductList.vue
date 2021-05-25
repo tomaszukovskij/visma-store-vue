@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import ProductItem from "./ProductItem.vue";
+import ProductItem from "./ProductListItem.vue";
 import ModalAddEdit from "../modal/ModalAddEdit.vue";
 import ModalDelete from "../modal/ModalDelete.vue";
 import AddNewProductBtn from "../actions/AddNewProductBtn.vue";
