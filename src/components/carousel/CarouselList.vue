@@ -24,18 +24,16 @@
           ></span>
         </div>
         <div class="carousel__buttons">
-          <button
-            type="button"
-            class="btn carousel-prev"
+          <base-button
+            class="carousel-prev"
             @click="moveCarouselHandler('back')"
-            :disabled="setAtrDisabledToBack"
-          ></button>
-          <button
-            type="button"
-            class="btn carousel-next"
+            :disabled="isFirstItemActive"
+          />
+          <base-button
+            class="carousel-next"
             @click="moveCarouselHandler('forward')"
-            :disabled="setAtrDisabledToFoeward"
-          ></button>
+            :disabled="isLastItemActive"
+          />
         </div>
       </div>
     </div>
@@ -44,12 +42,14 @@
 <script>
 import t from "vue-types";
 import CarouselItem from "./CarouselListItem.vue";
+import BaseButton from "../base/BaseButton.vue";
 export default {
   props: {
     carouselList: t.array.def([]),
   },
   components: {
     CarouselItem,
+    BaseButton,
   },
 
   data() {
@@ -60,19 +60,8 @@ export default {
     };
   },
   computed: {
-    setAtrDisabledToBack() {
-      return true === this.isFirstItemActive;
-    },
-    setAtrDisabledToFoeward() {
-      return true === this.isLastItemActive;
-    },
     carouselItemsCount() {
       return this.carouselList.length;
-    },
-    addTransition() {
-      return (this.$refs.carouselList.style.transition = this.isResizing
-        ? ""
-        : "transform 0.5s ease-in-out");
     },
 
     isFirstItemActive() {
@@ -84,6 +73,11 @@ export default {
     },
   },
   methods: {
+    addTransition() {
+      return (this.$refs.carouselList.style.transition = this.isResizing
+        ? ""
+        : "transform 0.5s ease-in-out");
+    },
     moveCarouselHandler(direction) {
       if (direction === "forward" && !this.isLastItemActive) {
         this.activeIndex += 1;
@@ -111,7 +105,7 @@ export default {
       const transformValue = this.activeIndex * this.windowWidth;
       this.$refs.carouselList.style.transform =
         "translate3d(-" + transformValue + "px, 0px, 0px)";
-      this.addTransition;
+      this.addTransition();
       this.isResizing = false;
     },
   },
