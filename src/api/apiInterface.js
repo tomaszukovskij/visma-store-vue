@@ -10,6 +10,17 @@ const http = {
     }
   },
 
+  async getSingle(url, id) {
+    try {
+      const response = await fetch(`${url}/${id}`);
+      const data = await response.json();
+
+      return data;
+    } catch (err) {
+      alert(err); // TypeError: failed to fetch
+    }
+  },
+
   async post(url, data) {
     const response = await fetch(url, {
       method: "POST",

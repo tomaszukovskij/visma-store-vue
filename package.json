@@ -12,10 +12,12 @@
     "node-sass": "^6.0.0",
     "vite-plugin-vue2": "^1.4.0",
     "vue": "^2.6.12",
-    "vue-router": "^3.5.1",
+    "vue-router": "^3.2.0",
     "vue-types": "^2.0.3"
   },
   "devDependencies": {
+    "eslint": "^7.27.0",
+    "eslint-plugin-vue": "^7.9.0",
     "node-sass": "^6.0.0",
     "sass": "^1.33.0",
     "sass-loader": "^10.2.0",
