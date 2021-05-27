@@ -3,7 +3,7 @@
     <the-header></the-header>
     <main>
       <carousel-list
-        v-if="productList.length"
+        v-if="carouselListData.length"
         :carousel-list="carouselListData"
       ></carousel-list>
       <product-list :product-list="productList"></product-list>
