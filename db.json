@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "title": "Product titleee",
+      "title": "Product title",
       "price": "36.99",
       "imageUrl": "https://placeimg.com/500/360/tech",
       "text": "Space for a small product description",
@@ -9,10 +9,19 @@
       "id": 1
     },
     {
-      "title": "Product titleee",
-      "price": 222,
-      "imageUrl": "https://placeimg.com/500/360/tech?v20",
-      "text": "asdasd asd ad ",
+      "title": "Titleee",
+      "price": "36.99",
+      "imageUrl": "https://placeimg.com/500/360/tech?v4",
+      "text": "Space for a small product description",
+      "isHighlighted": true,
+      "id": 1
+    },
+    {
+      "title": "Naujas",
+      "price": "20",
+      "imageUrl": "https://placeimg.com/500/360/tech?v9",
+      "text": "Sveiki",
+      "isHighlighted": true,
       "id": 5
     },
     {
@@ -20,8 +29,16 @@
       "price": "20",
       "imageUrl": "https://placeimg.com/500/360/tech?v9",
       "text": "Sveiki",
-      "isHighlighted": true,
+      "isHighlighted": false,
       "id": 6
+    },
+    {
+      "title": "Six titleeeeee",
+      "price": 111111,
+      "imageUrl": "https://placeimg.com/500/360/tech?v6",
+      "text": "1223",
+      "isHighlighted": false,
+      "id": 8
     }
   ]
 }

@@ -8,19 +8,19 @@
           :key="item.id"
           :item="item"
           @edit="sendProductDataEditToModal"
-        ></product-item>
+        />
       </div>
     </div>
     <modal-add-edit
       v-if="isEditModalVisible"
       :productData="productToEdit"
       @toggle-modal="toggleEditModalFn"
-    ></modal-add-edit>
+    />
     <modal-delete
       v-if="isDeleteModalVisible"
       :productData="productToEdit"
       @toggle-modal="toggleDeleteModalFn"
-    ></modal-delete>
+    />
     <div id="product-control">
       <div class="product-control__icon" @click="createNewProductHandler">
         +
@@ -30,14 +30,14 @@
 </template>
 
 <script>
-import ProductItem from "./ProductItem.vue";
+import ProductItem from "./ProductListItem.vue";
 import ModalAddEdit from "../modal/ModalAddEdit.vue";
 import ModalDelete from "../modal/ModalDelete.vue";
 import t from "vue-types";
 
 export default {
   props: {
-    productList: t.array,
+    productList: t.array.def([]),
   },
   components: {
     ProductItem,

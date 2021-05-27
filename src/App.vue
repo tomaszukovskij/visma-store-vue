@@ -2,6 +2,10 @@
   <div>
     <the-header></the-header>
     <main>
+      <carousel-list
+        v-if="carouselListData.length"
+        :carousel-list="carouselListData"
+      ></carousel-list>
       <product-list :product-list="productList"></product-list>
     </main>
     <the-footer></the-footer>
@@ -12,6 +16,7 @@
 import TheHeader from "./components/layout/TheHeader.vue";
 import TheFooter from "./components/layout/TheFooter.vue";
 import ProductList from "./components/product/ProductList.vue";
+import CarouselList from "./components/carousel/CarouselList.vue";
 import Http from "./api/apiInterface.js";
 
 export default {
@@ -19,6 +24,7 @@ export default {
     TheHeader,
     TheFooter,
     ProductList,
+    CarouselList,
   },
   data() {
     return {
@@ -29,6 +35,11 @@ export default {
     return {
       fetchProductData: this.fetchProductData,
     };
+  },
+  computed: {
+    carouselListData() {
+      return this.productList.filter((d) => d.isHighlighted);
+    },
   },
   methods: {
     async fetchProductData() {
