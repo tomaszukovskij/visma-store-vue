@@ -1,5 +1,5 @@
 <template>
-  <a href="" :class="carouselClass">
+  <a href="" class="carousel-list__item">
     <figure class="carousel-list__image">
       <img :src="item.imageUrl" :alt="item.title" />
     </figure>
@@ -12,16 +12,7 @@
 import t from "vue-types";
 export default {
   props: {
-    item: t.Object,
-    index: t.Number,
-  },
-  computed: {
-    carouselClass() {
-      return {
-        "carousel-list__item carousel-list__item--active": this.index === 0,
-        "carousel-list__item ": this.index !== 0,
-      };
-    },
+    item: t.object,
   },
 };
 </script>

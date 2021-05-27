@@ -7,20 +7,18 @@
             v-for="(item, index) in carouselList"
             :key="item.id"
             :item="item"
-            :index="index"
+            :class="{ 'carousel-list__item--active': index === activeIndex }"
             ref="carouselItem"
-          ></carousel-item>
+          />
         </div>
       </div>
       <div class="carousel__navigation">
         <div class="carousel__pagination">
           <span
             v-for="(item, index) in carouselList"
-            :key="item.id"
-            :class="{
-              'pagination-bullet pagination-bullet--active': index === 0,
-              'pagination-bullet': index !== 0,
-            }"
+            :key="'pag-' + item.id"
+            class="pagination-bullet"
+            :class="{ 'pagination-bullet--active': index === activeIndex }"
             ref="paginationItem"
             @click="moveCarouselOnPaginationHandler(index)"
           ></span>
@@ -48,7 +46,7 @@ import t from "vue-types";
 import CarouselItem from "./CarouselListItem.vue";
 export default {
   props: {
-    carouselList: t.Array,
+    carouselList: t.array.def([]),
   },
   components: {
     CarouselItem,
@@ -56,8 +54,9 @@ export default {
 
   data() {
     return {
-      carouselItemsActiveIndex: 0,
+      activeIndex: 0,
       isResizing: false,
+      windowWidth: 0,
     };
   },
   computed: {
@@ -75,69 +74,53 @@ export default {
         ? ""
         : "transform 0.5s ease-in-out");
     },
-    carouselWrapWidth() {
-      return this.$refs.carouselWrap.offsetWidth;
-    },
-    addActiveToItem() {
-      return this.$refs.carouselItem.forEach((item, index) => {
-        if (index === this.carouselItemsActiveIndex) {
-          item.$el.classList.add("carousel-list__item--active");
-        } else {
-          item.$el.classList.remove("carousel-list__item--active");
-        }
-      });
-    },
-    setActivePagination() {
-      return this.$refs.paginationItem.forEach((item, index) => {
-        if (index === this.carouselItemsActiveIndex) {
-          item.classList.add("pagination-bullet--active");
-        } else {
-          item.classList.remove("pagination-bullet--active");
-        }
-      });
-    },
+
     isFirstItemActive() {
-      return this.carouselItemsActiveIndex === 0;
+      return this.activeIndex === 0;
     },
 
     isLastItemActive() {
-      return this.carouselItemsActiveIndex === this.carouselItemsCount - 1;
-    },
-    onWindowResize() {
-      this.carouselWrapWidth;
-      this.isResizing = true;
-      this.$refs.carouselList.style.transition = "";
-      this.moveCarousel();
+      return this.activeIndex === this.carouselItemsCount - 1;
     },
   },
   methods: {
     moveCarouselHandler(direction) {
       if (direction === "forward" && !this.isLastItemActive) {
-        this.carouselItemsActiveIndex += 1;
-        console.log(this.carouselItemsActiveIndex);
+        this.activeIndex += 1;
       } else if (direction === "back" && !this.isFirstItemActive) {
-        this.carouselItemsActiveIndex -= 1;
+        this.activeIndex -= 1;
       }
 
-      this.isResizing = false;
+      this.moveCarousel();
+    },
+
+    moveCarouselOnPaginationHandler(index) {
+      this.activeIndex = index;
+      this.moveCarousel();
+    },
+    carouselWrapWidth() {
+      this.windowWidth = this.$refs.carouselWrap.offsetWidth;
+    },
+    onWindowResize() {
+      this.carouselWrapWidth();
+      this.isResizing = true;
+      this.$refs.carouselList.style.transition = "";
       this.moveCarousel();
     },
     moveCarousel() {
-      const transformValue =
-        this.carouselItemsActiveIndex * this.carouselWrapWidth;
+      const transformValue = this.activeIndex * this.windowWidth;
       this.$refs.carouselList.style.transform =
         "translate3d(-" + transformValue + "px, 0px, 0px)";
-      this.addActiveToItem;
       this.addTransition;
-      this.setActivePagination;
-    },
-    moveCarouselOnPaginationHandler(index) {
-      this.carouselItemsActiveIndex = index;
-      this.moveCarousel();
+      this.isResizing = false;
     },
   },
   mounted() {
-    window.addEventListener("resize", () => this.onWindowResize);
+    window.addEventListener("resize", this.onWindowResize);
+    this.carouselWrapWidth();
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.onWindowResize);
   },
 };
 </script>
