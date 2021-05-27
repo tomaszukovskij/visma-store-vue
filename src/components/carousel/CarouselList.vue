@@ -24,18 +24,16 @@
           ></span>
         </div>
         <div class="carousel__buttons">
-          <button
-            type="button"
-            class="btn carousel-prev"
+          <base-button
+            class="carousel-prev"
             @click="moveCarouselHandler('back')"
             :disabled="setAtrDisabledToBack"
-          ></button>
-          <button
-            type="button"
-            class="btn carousel-next"
+          />
+          <base-button
+            class="carousel-next"
             @click="moveCarouselHandler('forward')"
             :disabled="setAtrDisabledToFoeward"
-          ></button>
+          />
         </div>
       </div>
     </div>
@@ -44,12 +42,14 @@
 <script>
 import t from "vue-types";
 import CarouselItem from "./CarouselListItem.vue";
+import BaseButton from "../base/BaseButton.vue";
 export default {
   props: {
     carouselList: t.array.def([]),
   },
   components: {
     CarouselItem,
+    BaseButton,
   },
 
   data() {
