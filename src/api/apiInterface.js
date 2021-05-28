@@ -11,14 +11,12 @@ const http = {
   },
 
   async getSingle(url, id) {
-    try {
-      const response = await fetch(`${url}/${id}`);
-      const data = await response.json();
-
-      return data;
-    } catch (err) {
-      alert(err); // TypeError: failed to fetch
+    const response = await fetch(`${url}/${id}`);
+    const data = await response.json();
+    if (!response.ok) {
+      throw response;
     }
+    return data;
   },
 
   async post(url, data) {

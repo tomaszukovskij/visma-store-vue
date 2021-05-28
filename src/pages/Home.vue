@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     async fetchProductData() {
-      this.productList = await Http.get("/api/products");
+      this.productList = await Http.get("/products");
     },
   },
 
