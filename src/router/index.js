@@ -1,10 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import Home from "../pages/Home.vue";
 import Wrapper from "../pages/Wrapper.vue";
-
-const ProductDetails = () => import("../components/product/ProductDetails.vue");
 
 Vue.use(VueRouter);
 
@@ -15,12 +12,12 @@ const routes = [
     children: [
       {
         path: "",
-        component: Home,
+        component: () => import("../pages/Home.vue"),
       },
       {
         path: "/product/:id",
         name: "ProductDetails",
-        component: ProductDetails,
+        component: () => import("../components/product/ProductDetails.vue"),
         props: true,
         children: [
           {

@@ -1,40 +1,31 @@
 <template>
   <div>
     <carousel-list
-      v-if="productList.length"
-      :carousel-list="carouselListData"
+      v-if="getCarouselList.length"
+      :carousel-list="getCarouselList"
     />
-    <product-list :product-list="productList" />
+    <product-list v-if="getProductList.length" :product-list="getProductList" />
   </div>
 </template>
 <script>
 import ProductList from "../components/product/ProductList.vue";
 import CarouselList from "../components/carousel/CarouselList.vue";
-import Http from "../api/apiInterface.js";
+import { mapGetters, mapActions } from "vuex";
 export default {
   components: {
     ProductList,
     CarouselList,
   },
-  data() {
-    return {
-      productList: [],
-    };
-  },
-  provide() {
-    return {
-      fetchProductData: this.fetchProductData,
-    };
-  },
   computed: {
-    carouselListData() {
-      return this.productList.filter((d) => d.isHighlighted);
+    getProductList() {
+      return this.$store.state.productList;
     },
+    ...mapGetters(["getCarouselList"]),
   },
   methods: {
-    async fetchProductData() {
-      this.productList = await Http.get("/products");
-    },
+    ...mapActions({
+      fetchProductData: "fetchProductList",
+    }),
   },
 
   created() {
