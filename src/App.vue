@@ -2,7 +2,7 @@
   <div>
     <the-header />
     <main>
-      <router-view></router-view>
+      <router-view />
     </main>
     <the-footer />
   </div>

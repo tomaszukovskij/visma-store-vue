@@ -12,7 +12,7 @@
         <router-link :to="{ name: 'quotes' }">Quotes</router-link>
       </div>
       <div class="product-single__tabs-view">
-        <router-view></router-view>
+        <router-view />
       </div>
     </div>
   </section>

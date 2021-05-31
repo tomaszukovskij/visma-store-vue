@@ -79,7 +79,6 @@ export default {
         : "transform 0.5s ease-in-out");
     },
     moveCarouselHandler(direction) {
-      console.log("click");
       if (direction === "forward" && !this.isLastItemActive) {
         this.activeIndex += 1;
       } else if (direction === "back" && !this.isFirstItemActive) {
