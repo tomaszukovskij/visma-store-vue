@@ -1,5 +1,8 @@
 <template>
-  <a href="" class="products-list__item">
+  <router-link
+    :to="{ name: 'ProductDetails', params: { id: item.id } }"
+    class="products-list__item"
+  >
     <figure class="products-list__image">
       <img :src="item.imageUrl" :alt="item.title" />
     </figure>
@@ -23,7 +26,7 @@
         >
       </div>
     </div>
-  </a>
+  </router-link>
 </template>
 <script>
 import BaseButton from "../base/BaseButton.vue";

@@ -26,12 +26,12 @@
         <div class="carousel__buttons">
           <base-button
             class="carousel-prev"
-            @click="moveCarouselHandler('back')"
+            @click.native="moveCarouselHandler('back')"
             :disabled="isFirstItemActive"
           />
           <base-button
             class="carousel-next"
-            @click="moveCarouselHandler('forward')"
+            @click.native="moveCarouselHandler('forward')"
             :disabled="isLastItemActive"
           />
         </div>

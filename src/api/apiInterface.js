@@ -10,6 +10,15 @@ const http = {
     }
   },
 
+  async getSingle(url, id) {
+    const response = await fetch(`${url}/${id}`);
+    const data = await response.json();
+    if (!response.ok) {
+      throw response;
+    }
+    return data;
+  },
+
   async post(url, data) {
     const response = await fetch(url, {
       method: "POST",
