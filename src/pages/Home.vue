@@ -4,22 +4,20 @@
       v-if="getCarouselList.length"
       :carousel-list="getCarouselList"
     />
-    <product-list v-if="getProductList.length" :product-list="getProductList" />
+    <product-list v-if="productList.length" :product-list="productList" />
   </div>
 </template>
 <script>
 import ProductList from "../components/product/ProductList.vue";
 import CarouselList from "../components/carousel/CarouselList.vue";
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapState } from "vuex";
 export default {
   components: {
     ProductList,
     CarouselList,
   },
   computed: {
-    getProductList() {
-      return this.$store.state.productList;
-    },
+    ...mapState(["productList"]),
     ...mapGetters(["getCarouselList"]),
   },
   methods: {

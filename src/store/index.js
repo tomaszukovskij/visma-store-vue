@@ -15,8 +15,13 @@ const store = new Vuex.Store({
   },
   actions: {
     async fetchProductList(context) {
-      const data = await Http.get("/products");
-      context.commit("setProductList", await data);
+      try {
+        let data = [];
+        data = await Http.get("/products");
+        context.commit("setProductList", await data);
+      } catch (err) {
+        console.log(err.statusText);
+      }
     },
   },
   getters: {

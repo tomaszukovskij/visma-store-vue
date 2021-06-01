@@ -43,6 +43,7 @@ import InputGroup from "../form/InputGroup.vue";
 import TheModal from "../modal/TheModal.vue";
 import BaseButton from "../base/BaseButton.vue";
 import Http from "../../api/apiInterface.js";
+import { mapActions } from "vuex";
 export default {
   props: {
     productData: t.object,
@@ -84,10 +85,13 @@ export default {
     },
   },
   methods: {
+    ...mapActions({
+      fetchProductData: "fetchProductList",
+    }),
     hideModalHandler() {
       this.$emit("toggle-modal", false);
     },
-    async editProductHandler() {
+    editProductHandler() {
       const data = {
         title: this.title,
         price: this.price,
@@ -103,7 +107,7 @@ export default {
       }
 
       this.hideModalHandler();
-      await this.$store.dispatch("setProductList");
+      this.fetchProductData();
     },
   },
 };
