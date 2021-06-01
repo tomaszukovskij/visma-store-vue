@@ -43,8 +43,8 @@ import InputGroup from "../form/InputGroup.vue";
 import TheModal from "../modal/TheModal.vue";
 import BaseButton from "../base/BaseButton.vue";
 import Http from "../../api/apiInterface.js";
+import { mapActions } from "vuex";
 export default {
-  inject: ["fetchProductData"],
   props: {
     productData: t.object,
   },
@@ -85,19 +85,13 @@ export default {
     },
   },
   methods: {
+    ...mapActions({
+      fetchProductData: "fetchProductList",
+    }),
     hideModalHandler() {
       this.$emit("toggle-modal", false);
     },
     editProductHandler() {
-      // let isValid;
-
-      // for (const property in this.$refs) {
-      //   const provider = await this.$refs[property];
-      //   const valid = await provider.validate();
-      //   isValid = valid.valid;
-      // }
-
-      // if (!isValid) return;
       const data = {
         title: this.title,
         price: this.price,
@@ -107,9 +101,9 @@ export default {
       };
 
       if (this.productData.data !== undefined) {
-        Http.put("/api/products/" + this.productData.data.id, data);
+        Http.put("products/" + this.productData.data.id, data);
       } else {
-        Http.post("/api/products/", data);
+        Http.post("products/", data);
       }
 
       this.hideModalHandler();
