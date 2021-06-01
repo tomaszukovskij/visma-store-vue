@@ -14,6 +14,7 @@
         <base-button
           class="btn--primary btn--xs-full"
           :value="item.id"
+          role="edit"
           @click.prevent.native="sendEditDataToModal"
         >
           Edit
